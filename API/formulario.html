@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Cluster</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #333;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 2rem;
+            padding: 0.75rem;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        .prediction {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #444;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .logo img {
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='TCA_Logo.png') }}" alt="Logo">
+    </div>
+    <div class="container">
+        <h1>Predicción de Cluster</h1>
+        <form method="post">
+            <label for="h_res_fec">Fecha de reservación:</label>
+            <input name="h_res_fec" placeholder="yyyy-mm-dd"><br>
+
+            <label for="h_fec_lld">Fecha de llegada:</label>
+            <input name="h_fec_lld" placeholder="yyyy-mm-dd"><br>
+
+            <label for="h_num_adu">Número de adultos:</label>
+            <input name="h_num_adu" placeholder="Adultos"><br>
+
+            <label for="h_num_men">Número de menores:</label>
+            <input name="h_num_men" placeholder="Menores"><br>
+
+            <label for="h_num_noc">Número de noches:</label>
+            <input name="h_num_noc" placeholder="Noches"><br>
+
+            <label for="ID_Tipo_Habitacion">ID tipo de habitación:</label>
+            <input name="ID_Tipo_Habitacion" placeholder="ID"><br>
+
+            <label for="ID_Paquete">ID paquete:</label>
+            <input name="ID_Paquete" placeholder="ID"><br>
+
+            <label for="h_can_res">Canal para reservación:</label>
+            <input name="h_can_res" placeholder="Canal"><br>
+
+
+
+            <button type="submit">Predecir</button>
+        </form>
+        {% if prediction is not none %}
+            <div class="prediction">
+                Resultado: <strong>{{ prediction }}</strong>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
